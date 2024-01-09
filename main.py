@@ -139,14 +139,14 @@ class AddressBook(UserDict):
 
     def save_to_file(self, filename):
         with open(filename, 'w') as file:
-            simple_data = {k: v.simple_repr() for k, v in self.data.items()}
+            simple_data = {k: v.simple_display() for k, v in self.data.items()}
             json.dump(simple_data, file)
 
     def load_from_file(self, filename):
         with open(filename, 'r') as file:
             data = json.load(file)
             for name, record_data in data.items():
-                record = Record.from_simple_repr(record_data)
+                record = Record.from_simple_display(record_data)
                 self.data[name] = record
 
     def search(self, query):
